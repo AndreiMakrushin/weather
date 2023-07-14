@@ -3,6 +3,7 @@ import { useWeatherStore } from './stores/counter'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import CardToday from './components/CardToday.vue'
+import TimeMap from './components/TimeMap.vue'
 
 const store = useWeatherStore()
 
@@ -15,6 +16,9 @@ const isTomorrow = (date) => {
   const tomorrow = format(tomorrowDate, 'yyyy-MM-dd', { locale: ru })
   return date.includes(tomorrow)
 }
+
+
+
 </script>
 
 <template>
@@ -23,6 +27,7 @@ const isTomorrow = (date) => {
 
     <div v-if="store.cityWeather" class="weather-container">
       <CardToday :Today="store.cityWeather.list[0]" />
+      <TimeMap :timemap="store.cityWeather.list" />
 
       <div v-for="item in store.cityWeather.list.slice(1)" :key="item.dt" class="weather-item">
         <div class="weather-info">

@@ -1,8 +1,5 @@
 <script setup>
 const props = defineProps(['Today'])
-
-
-console.log(props);
 </script>
 
 <template>
@@ -17,10 +14,10 @@ console.log(props);
           <div class="weather-humidity">Влажность: {{ item.main.humidity }}</div>
           <div class="weather-description">Погода: {{ item.weather[0].description }}</div>
           <img
-          :src="'http://openweathermap.org/img/wn/' + item.weather[0].icon + '.png'"
-          alt=""
-          class="weather-icon"
-        />
+            :src="'http://openweathermap.org/img/wn/' + item.weather[0].icon + '.png'"
+            alt=""
+            class="weather-icon"
+          />
         </div>
       </div>
     </div>
