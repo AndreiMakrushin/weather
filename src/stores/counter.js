@@ -1,11 +1,14 @@
 import axios from 'axios'
+import key from '../../key'
 import { defineStore } from 'pinia'
 import { ref, onMounted, watch } from 'vue'
 
 export const useWeatherStore = defineStore('weather', () => {
+
+  console.log(key.key);
   const weather = async (city) => {
     const response = await axios(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ru&units=metric&appid=62b5e8a6b5a21591deb1e27b136f6910`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ru&units=metric&appid=${key.key}`
     )
     return response.data
   }
