@@ -10,11 +10,6 @@ const store = useWeatherStore()
 
 const currentDate = new Date()
 const month = format(currentDate, 'w d MMMM', { locale: ru })
-
-
-
-
-
 </script>
 
 <template>
@@ -31,6 +26,10 @@ const month = format(currentDate, 'w d MMMM', { locale: ru })
 </template>
 
 <style>
+input {
+  font-size: 35px;
+  font-family: 'poppins';
+}
 .weather-app {
   text-align: center;
 }

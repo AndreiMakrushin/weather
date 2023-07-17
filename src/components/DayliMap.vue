@@ -1,6 +1,5 @@
 <script setup>
 import { getDay } from 'date-fns'
-import { ref } from 'vue'
 import { defineProps } from 'vue'
 
 const props = defineProps(['daymap'])
@@ -21,16 +20,24 @@ const getWeatherForTodays = (daymap) => {
      return todayWeather
    }
    const getWeekday = (date) => {
-     const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
-     const dayIndex = getDay(new Date(date))
-     return weekdays[dayIndex]
-   }
+  const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+  const currentDate = new Date()
+  const dayIndex = getDay(new Date(date)) + 1
+
+  if (currentDate.getDate()  === new Date(date).getDate()) {
+    return 'Завтра'
+  }
+
+  return weekdays[dayIndex]
+}
+
+
 
 </script>
 
 <template>
   <div>
-    <div v-for="item in getWeatherForTodays(props.daymap)" :key="item.dt" class="weather-item">
+    <div v-for="item in getWeatherForTodays(props.daymap.slice(1))" :key="item.dt" class="weather-item">
         <div class="weather-info">
           <div class="weather-date">{{ getWeekday(item.dt_txt) }}</div>
           <div class="weather-details">
