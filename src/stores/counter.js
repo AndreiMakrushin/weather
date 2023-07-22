@@ -5,14 +5,40 @@ import { ref, onMounted, watch } from 'vue'
 
 export const useWeatherStore = defineStore('weather', () => {
 
-  const weather = async (city) => {
-    const response = await axios(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ru&units=metric&appid=${key.key}`
-    )
-    return response.data
-  }
-  const citySelect = ref('Тюмень')
+  const citySelect = ref('Москва')
   const cityWeather = ref(null)
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+  
+      axios.get(`https://geocode-maps.yandex.ru/1.x/?format=json&geocode=${longitude},${latitude}&apikey=${key.keyYandex}`)
+        .then(response => {
+          const city = response.data.response.GeoObjectCollection.featureMember[3].GeoObject.name;
+          citySelect.value = city
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        });
+    }, (error) => {
+      console.log('Error:', error);
+    });
+  } else {
+    console.log('Geolocation is not supported by this browser.');
+  }
+  const weather = async (city) => {
+    try {
+      const response = await axios(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=ru&units=metric&appid=${key.key}`
+      )
+      return response.data
+    } catch (error) {
+      console.log('Error:', error);
+    }
+    
+  }
+  
 
   onMounted(async () => {
     await fetchWeather()
@@ -41,6 +67,8 @@ export const useWeatherStore = defineStore('weather', () => {
 
     return debouncedValue
   }
+  
+  
 
   return { weather, citySelect, cityWeather }
 })
