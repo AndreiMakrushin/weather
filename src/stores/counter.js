@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { getDay } from 'date-fns'
 import key from '../../key'
 import { defineStore } from 'pinia'
 import { ref, onMounted, watch } from 'vue'
 
 export const useWeatherStore = defineStore('weather', () => {
-
+  const SearchCity = ref(false)
   const citySelect = ref('Москва')
   const cityWeather = ref(null)
 
@@ -38,8 +39,6 @@ export const useWeatherStore = defineStore('weather', () => {
     }
     
   }
-  
-
   onMounted(async () => {
     await fetchWeather()
     useDebounce(citySelect, 500)
@@ -68,7 +67,16 @@ export const useWeatherStore = defineStore('weather', () => {
     return debouncedValue
   }
   
+  const getWeekday = (date) => {
+    const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+    const currentDate = new Date()
+    const dayIndex = getDay(new Date(date)) + 1
   
+    if (currentDate.getDate() === new Date(date).getDate()) {
+      return 'Завтра'
+    }
+    return dayIndex === 7 ? 'Вс' : weekdays[dayIndex]
+  }
 
-  return { weather, citySelect, cityWeather }
+  return { weather, citySelect, cityWeather, getWeekday, SearchCity }
 })

@@ -1,6 +1,8 @@
 <script setup>
-import { getDay } from 'date-fns'
+import { useWeatherStore } from '../stores/counter'
 import { defineProps } from 'vue'
+
+const store = useWeatherStore()
 
 const props = defineProps(['daymap'])
 
@@ -36,16 +38,7 @@ const getWeatherForTodays = (daymap) => {
   return maxTemperatures
 }
 
-const getWeekday = (date) => {
-  const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
-  const currentDate = new Date()
-  const dayIndex = getDay(new Date(date)) + 1
 
-  if (currentDate.getDate() === new Date(date).getDate()) {
-    return 'Завтра'
-  }
-  return dayIndex === 7 ? 'Вс' : weekdays[dayIndex]
-}
 </script>
 
 <template>
@@ -56,7 +49,7 @@ const getWeekday = (date) => {
       class="weather-item"
     >
       <div class="weather-info">
-        <div class="weather-date">{{ getWeekday(item.date) }}</div>
+        <div class="weather-date">{{ store.getWeekday(item.date) }}</div>
         <div class="weather-details">
           <div class="weather-temperature">Температура: {{ Math.round(item.temperature) }}°C</div>
           <div class="weather-pressure">Давление: {{ item.pressure }} мм</div>

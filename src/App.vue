@@ -1,27 +1,26 @@
 <script setup>
 import { useWeatherStore } from './stores/counter'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
 import CardToday from './components/CardToday.vue'
 import TimeMap from './components/TimeMap.vue'
 import DayliMap from './components/DayliMap.vue'
+import Search from './components/Search.vue'
 
 const store = useWeatherStore()
 
-const currentDate = new Date()
-const month = format(currentDate, 'w d MMMM', { locale: ru })
+
 </script>
 
 <template>
   <div class="weather-app">
-    <input type="text" v-model="store.citySelect" placeholder="Введите нужный вам город" />
+    <div v-if="store.SearchCity">
+      <Search />
+    </div>
 
     <div v-if="store.cityWeather" class="weather-container">
       <CardToday :Today="store.cityWeather.list[0]" />
       <TimeMap :timemap="store.cityWeather.list" />
       <DayliMap :daymap="store.cityWeather.list" />
     </div>
-    <div class="weather-date">{{ month }}</div>
   </div>
 </template>
 
