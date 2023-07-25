@@ -5,27 +5,27 @@ const props = defineProps(['Today'])
 const store = useWeatherStore()
 
 const today = new Date()
-const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
-const weekday = weekdays[today.getDay()]
-const day = today.getDate()
-const month = getMonthName(today.getMonth())
-function getMonthName(month) {
-  const months = [
-    'января',
-    'февраля',
-    'марта',
-    'апреля',
-    'мая',
-    'июня',
-    'июля',
-    'августа',
-    'сентября',
-    'октября',
-    'ноября',
-    'декабря'
-  ]
-  return months[month]
-}
+  const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+  const weekday = weekdays[today.getDay()]
+  const day = today.getDate()
+  const month = getMonthName(today.getMonth())
+  function getMonthName(month) {
+    const months = [
+      'января',
+      'февраля',
+      'марта',
+      'апреля',
+      'мая',
+      'июня',
+      'июля',
+      'августа',
+      'сентября',
+      'октября',
+      'ноября',
+      'декабря'
+    ]
+    return months[month]
+  }
 </script>
 
 <template>
@@ -76,10 +76,11 @@ function getMonthName(month) {
   color: aliceblue;
   background-color: #212331;
   display: flex;
-  max-width: 460px;
+  max-width: 390px;
   padding: 10px;
 }
 .weather {
+  padding: 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -105,6 +106,9 @@ h3 {
   font-weight: 800;
   letter-spacing: 2px;
 }
+.main{
+  text-align: center;
+}
 .main img {
   width: 150px;
   height: 150px;
@@ -118,6 +122,7 @@ h3 {
   width: 50px;
 }
 .today {
+  margin-top: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

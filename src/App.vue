@@ -6,85 +6,63 @@ import DayliMap from './components/DayliMap.vue'
 import Search from './components/Search.vue'
 
 const store = useWeatherStore()
-
-
 </script>
 
 <template>
-  <div class="weather-app">
-    <div v-if="store.SearchCity">
-      <Search />
-    </div>
+  <div class="main-container">
+    <div class="container">
 
-    <div v-if="store.cityWeather" class="weather-container">
-      <CardToday :Today="store.cityWeather.list[0]" />
-      <TimeMap :timemap="store.cityWeather.list" />
-      <DayliMap :daymap="store.cityWeather.list" />
+        <div v-if="store.SearchCity">
+          <Search />
+        </div>
+
+        <div v-if="store.cityWeather" class="weather-container">
+          <div class="today">
+            <CardToday :Today="store.cityWeather.list[0]" />
+          </div>
+          <div class="timeMap">
+            <TimeMap :timemap="store.cityWeather.list" />
+          </div>
+          <div class="dailyMap">
+            <DayliMap :daymap="store.cityWeather.list" />
+          </div>
+        </div>
+        <div v-else>идет загрузка</div>
+
     </div>
   </div>
 </template>
 
-<style>
-input {
-  font-size: 35px;
-  font-family: 'poppins';
+<style scoped>
+.main-container {
+  max-width: 1700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.weather-app {
-  text-align: center;
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .weather-container {
+  flex: 1;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: row;
 }
 
-.weather-item {
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+.today {
+  flex: 1;
 }
 
-.weather-item:hover {
-  transform: scale(1.05);
+.timeMap {
+  flex: 1;
 }
 
-.weather-icon {
-  width: 80px;
-  height: 80px;
-  margin-top: 10px;
-}
-
-.weather-date {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.weather-details {
-  margin-top: 20px;
-}
-
-.weather-temperature,
-.weather-pressure,
-.weather-wind,
-.weather-humidity,
-.weather-description {
-  margin-bottom: 10px;
-}
-
-.weather-temperature {
-  font-size: 18px;
-}
-
-.weather-pressure,
-.weather-wind,
-.weather-humidity,
-.weather-description {
-  font-size: 14px;
-  color: #666;
+.dailyMap {
+  flex: 1;
 }
 </style>
+
