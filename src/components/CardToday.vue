@@ -118,8 +118,10 @@ h3 {
   display: flex;
   flex-direction: row;
 }
+
 .img-location img {
-  width: 50px;
+  width: 30px;
+  height: 50px;
 }
 .today {
   margin-top: 80px;
