@@ -1,11 +1,6 @@
 <script setup>
 import { useWeatherStore } from '../stores/counter'
-import { defineProps } from 'vue'
-
 const store = useWeatherStore()
-
-const props = defineProps(['daymap'])
-
 const getWeatherForTodays = (daymap) => {
   const maxTemperatures = daymap.reduce((acc, time) => {
     const forecastDate = time.dt_txt.split(' ')[0]
@@ -50,7 +45,11 @@ const getWeatherForTodays = (daymap) => {
 <template>
   <div>
     <div class="block-day-temperature">
-      <div v-for="item in getWeatherForTodays(props.daymap)" :key="item.dt" class="weather-item">
+      <div
+        v-for="item in getWeatherForTodays(store.cityWeather.list)"
+        :key="item.dt"
+        class="weather-item"
+      >
         <div class="weather-info">
           <p class="weather-date">{{ store.getWeekday(item.date) }}</p>
           <div class="weather-details">
@@ -91,12 +90,12 @@ const getWeatherForTodays = (daymap) => {
 .weather-info {
   text-align: center;
 }
-.temp{
+.temp {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.temp .weather-temp-night{
- color: #acacac;
+.temp .weather-temp-night {
+  color: #acacac;
 }
 </style>

@@ -1,9 +1,12 @@
 <script setup>
+import { RouterView } from "vue-router";
 import { useWeatherStore } from './stores/counter'
 import CardToday from './components/CardToday.vue'
 import TimeMap from './components/TimeMap.vue'
 import DayliMap from './components/DayliMap.vue'
 import Search from './components/Search.vue'
+import CurrentData from './components/CurrentData.vue'
+import Header from './components/Header.vue'
 
 const store = useWeatherStore()
 </script>
@@ -17,14 +20,19 @@ const store = useWeatherStore()
         </div>
 
         <div v-if="store.cityWeather" class="weather-container">
+          <Header />
           <div class="today">
             <CardToday :Today="store.cityWeather.list[0]" />
           </div>
-          <div class="timeMap">
+          <RouterView />
+          <!-- <div class="timeMap">
             <TimeMap :timemap="store.cityWeather.list" />
           </div>
           <div class="dailyMap">
             <DayliMap :daymap="store.cityWeather.list" />
+          </div> -->
+          <div class="current-data">
+            <CurrentData :current="store.cityWeather.list[0]"/>
           </div>
         </div>
         <div v-else>идет загрузка</div>
@@ -48,9 +56,10 @@ const store = useWeatherStore()
 }
 
 .weather-container {
+  background-color: #100E1C;
   flex: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .today {
