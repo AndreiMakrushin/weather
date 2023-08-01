@@ -3,29 +3,6 @@ import { useWeatherStore } from '../stores/counter'
 const props = defineProps(['Today'])
 
 const store = useWeatherStore()
-
-const today = new Date()
-  const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
-  const weekday = weekdays[today.getDay()]
-  const day = today.getDate()
-  const month = getMonthName(today.getMonth())
-  function getMonthName(month) {
-    const months = [
-      'января',
-      'февраля',
-      'марта',
-      'апреля',
-      'мая',
-      'июня',
-      'июля',
-      'августа',
-      'сентября',
-      'октября',
-      'ноября',
-      'декабря'
-    ]
-    return months[month]
-  }
 </script>
 
 <template>
@@ -52,7 +29,7 @@ const today = new Date()
             <p>Ощущается как {{ Math.round(item.main.feels_like) }} °C</p>
             <div class="today">
               <p>Сегодня</p>
-              <p>{{ weekday }}, {{ day }} {{ month }}</p>
+              <p>{{ store.getWeekday(item.dt_txt).join(' ')}}</p>
             </div>
           </div>
         </div>

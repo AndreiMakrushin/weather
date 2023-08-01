@@ -1,6 +1,12 @@
 <script setup>
 import { isSameDay } from 'date-fns'
 import { useWeatherStore } from '../stores/counter';
+import { onUnmounted } from 'vue';
+
+
+onUnmounted(() => {
+  console.log("компонено был удален");
+})
 
 const store = useWeatherStore()
 

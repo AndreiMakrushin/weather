@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { getDay } from 'date-fns'
 import key from '../../key'
 import { defineStore } from 'pinia'
 import { ref, onMounted, watch } from 'vue'
@@ -75,13 +74,32 @@ export const useWeatherStore = defineStore('weather', () => {
   const getWeekday = (date) => {
     const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
     const currentDate = new Date()
-    const dayIndex = getDay(new Date(date)) + 1
-
-    if (currentDate.getDate()+1 === new Date(date).getDate()) {
-      return 'Завтра'
+    const dayIndex = new Date(date).getDay()
+    const day = new Date(date).getDate()
+    const month = getMonthName(currentDate.getMonth())
+    if (currentDate.getDate() + 1 === new Date(date).getDate()) {
+      return ' Завтра'
     }
-    return dayIndex === 7 ? 'Вс' : weekdays[dayIndex]
+    function getMonthName(month) {
+      const months = [
+        'января',
+        'февраля',
+        'марта',
+        'апреля',
+        'мая',
+        'июня',
+        'июля',
+        'августа',
+        'сентября',
+        'октября',
+        'ноября',
+        'декабря'
+      ]
+      return months[month]
+    }
+    return dayIndex === 7 ? 'Вс' : [weekdays[dayIndex],  String(day) , month]
   }
+
 
   
 

@@ -1,5 +1,6 @@
 <script setup>
 import { useWeatherStore } from '../stores/counter'
+
 const store = useWeatherStore()
 const getWeatherForTodays = (daymap) => {
   const maxTemperatures = daymap.reduce((acc, time) => {
@@ -51,7 +52,14 @@ const getWeatherForTodays = (daymap) => {
         class="weather-item"
       >
         <div class="weather-info">
-          <p class="weather-date">{{ store.getWeekday(item.date) }}</p>
+          <p class="weather-date">
+            {{
+              [store.getWeekday(item.date)[0]]
+                .concat(store.getWeekday(item.date).slice(1))
+                .join(' ')
+            }}
+          </p>
+
           <div class="weather-details">
             <img
               :src="'http://openweathermap.org/img/wn/' + item.image + '.png'"
