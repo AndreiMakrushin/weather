@@ -35,13 +35,13 @@ const store = useWeatherStore()
 
 <style scoped>
 .main {
+  background-color: #100e1c;
   justify-content: center;
   align-items: center;
 }
 .main-container {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 .container {
@@ -51,7 +51,7 @@ const store = useWeatherStore()
 }
 
 .weather-container {
-  background-color: #100e1c;
+  
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -72,5 +72,12 @@ const store = useWeatherStore()
 
 .dailyMap {
   flex: 1;
+}
+@media (max-width: 1200px) {
+  .today {
+  background-color: #100e1c;
+  flex-direction: column;
+  margin: 0 auto;
+}
 }
 </style>

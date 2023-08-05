@@ -46,12 +46,13 @@ const store = useWeatherStore()
 
 <style scoped>
 .container-weather {
+  margin: 0;
   font-family: 'Poppins', sans-serif;
   color: aliceblue;
   background-color: #212331;
   display: flex;
   padding: 15px;
-  max-width: 700px;
+  max-width: 610px;
   height: 100%;
 }
 .weather {

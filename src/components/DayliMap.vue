@@ -108,4 +108,12 @@ const getWeatherForTodays = (daymap) => {
 .temp .weather-temp-night {
   color: #acacac;
 }
+
+@media (max-width: 1200px) {
+  .block-day-temperature{
+    margin: 0 auto;
+    max-width: 300px;
+    flex-direction: column;
+  }
+}
 </style>

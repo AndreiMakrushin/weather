@@ -35,36 +35,62 @@
   <style scoped>
 .main-container {
   display: flex;
-  width: 1123px;
   color: white;
+  justify-content: center; /* Добавлено */
+  align-items: center; /* Добавлено */
 }
+
 .container {
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center; /* Добавлено */
+  align-items: center; /* Добавлено */
 }
+
 .left-block {
   width: 50%;
   margin-right: 8px;
 }
+
 .rigth-block {
   margin-left: 8px;
   width: 50%;
 }
+
 .wind {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Добавлено */
-  justify-content: center; /* Добавлено */
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 70%;
+  height: 268.7px;
   font-size: 30px;
   padding: 20px;
   border-radius: 20px;
   background-color: #212331;
   margin: 15px;
 }
+
 .wind h1 {
   margin-top: 20px;
 }
+
+@media (max-width: 1200px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wind {
+    width: 260px;
+    margin: 15px auto; /* Добавлено */
+  }
+}
 </style>
+
