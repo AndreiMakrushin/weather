@@ -30,7 +30,7 @@ const getWeatherForToday = (timemap) => {
           <p>{{ item.dt_txt.split(' ')[1].substring(0, 5) }}</p>
           <div class="weather-details">
             <img
-              :src="'http://openweathermap.org/img/wn/' + item.weather[0].icon + '.png'"
+              :src="store.getWeatherImage(item.weather[0].icon)"
               alt=""
               class="weather-icon"
             />
@@ -53,19 +53,29 @@ const getWeatherForToday = (timemap) => {
   color: white;
   background-color: #212331;
   border-radius: 20px;
-  padding: 15px;
+  padding: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .weather-details .weather-icon {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
+}
+.weather-date {
+  font-size: 25px;
 }
 .weather-info {
   text-align: center;
 }
-.temp .weather-temp-night{
- color: #acacac;
+.temp {
+  text-align: center;
+  font-size: 25px;
+}
+.temp .weather-temp-night {
+  color: #acacac;
+}
+p{
+  font-size: 25px;
 }
 </style>

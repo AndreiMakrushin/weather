@@ -13,6 +13,8 @@ const getWeatherForTodays = (daymap) => {
     const desc = time.weather[0].description
     const image = time.weather[0].icon
 
+    console.log(time.weather[0].icon)
+
     const currentDate = new Date().toISOString().split('T')[0]
 
     if (forecastDate === currentDate) {
@@ -50,7 +52,7 @@ const getWeatherForTodays = (daymap) => {
         v-for="item in getWeatherForTodays(store.cityWeather.list)"
         :key="item.dt"
         class="weather-item"
-      >
+       >
         <div class="weather-info">
           <p class="weather-date">
             {{
@@ -61,18 +63,14 @@ const getWeatherForTodays = (daymap) => {
           </p>
 
           <div class="weather-details">
-            <img
-              :src="'http://openweathermap.org/img/wn/' + item.image + '.png'"
-              alt=""
-              class="weather-icon"
-            />
+            <img :src="store.getWeatherImage(item.image)" alt="" class="weather-icon" />
             <div class="temp">
               <p class="weather-temp-day">{{ Math.round(item.temperature) }}°C</p>
               <p class="weather-temp-night">{{ Math.round(item.minTemperaturee) }}°C</p>
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -86,19 +84,23 @@ const getWeatherForTodays = (daymap) => {
   color: white;
   background-color: #212331;
   border-radius: 20px;
-  padding: 15px;
+  padding: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .weather-details .weather-icon {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
+}
+.weather-date {
+  font-size: 25px;
 }
 .weather-info {
   text-align: center;
 }
 .temp {
+  font-size: 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

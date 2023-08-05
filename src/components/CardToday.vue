@@ -20,16 +20,13 @@ const store = useWeatherStore()
         </div>
         <div class="main-block">
           <div class="main" v-for="item in props" :key="item.dt">
-            <img
-              :src="'http://openweathermap.org/img/wn/' + item.weather[0].icon + '.png'"
-              class="weather-icon"
-            />
+            <img :src="store.getWeatherImage(item.weather[0].icon)" class="weather-icon" />
             <h1>{{ Math.round(item.main.temp) }}°C</h1>
             <h3>{{ item.weather[0].description }}</h3>
             <p>Ощущается как {{ Math.round(item.main.feels_like) }} °C</p>
             <div class="today">
               <p>Сегодня</p>
-              <p>{{ store.getWeekday(item.dt_txt).join(' ')}}</p>
+              <p>{{ store.getWeekday(item.dt_txt).join(' ') }}</p>
             </div>
           </div>
         </div>
@@ -53,15 +50,14 @@ const store = useWeatherStore()
   color: aliceblue;
   background-color: #212331;
   display: flex;
-  max-width: 390px;
-  padding: 10px;
+  padding: 15px;
+  max-width: 700px;
+  height: 100%;
 }
 .weather {
   padding: 10px;
-  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 .search-btm {
@@ -72,41 +68,45 @@ const store = useWeatherStore()
 }
 .button {
   cursor: pointer;
-  margin-right: 100px;
+  margin-right: 200px;
 }
 h1 {
-  margin: 0 15px;
+  margin: 0 120px;
   font-weight: 900;
-  font-size: 96px;
+  font-size: 130px;
 }
 h3 {
+  font-size: 35px;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
 }
-.main{
+.main {
   text-align: center;
 }
 .main img {
-  width: 150px;
-  height: 150px;
+  width: 350px;
+  height: 350px;
 }
 .location {
-  margin-bottom: 10px;
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
 }
 
 .img-location img {
-  width: 30px;
+  width: 50px;
   height: 50px;
 }
 .today {
+  margin: 0 auto;
+  max-width: 400px;
   margin-top: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 p {
+  font-size: 25px;
   color: #acacac;
 }
 .today p {
@@ -116,7 +116,7 @@ button {
   border-radius: 10px;
   border: 1px solid #e6e6e6;
   background-color: #212331;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   color: #e6e6e6;
   width: 180px;

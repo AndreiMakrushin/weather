@@ -12,34 +12,36 @@ const store = useWeatherStore()
 <template>
   <div class="main">
     <div class="main-container">
-    <div class="container">
-      <div v-if="store.SearchCity">
-        <Search />
-      </div>
+      <div class="container">
+        <div v-if="store.SearchCity">
+          <Search />
+        </div>
 
-      <div v-if="store.cityWeather" class="weather-container">
-        <div class="today">
-          <CardToday :Today="store.cityWeather.list[0]" />
-          <div class="current-data">
-            <Header />
-            <RouterView />
-            <CurrentData :current="store.cityWeather.list[0]" />
+        <div v-if="store.cityWeather" class="weather-container">
+          <div class="today">
+            <CardToday :Today="store.cityWeather.list[0]" />
+            <div class="current-data">
+              <Header />
+              <RouterView />
+              <CurrentData :current="store.cityWeather.list[0]" />
+            </div>
           </div>
         </div>
+        <div v-else>идет загрузка</div>
       </div>
-      <div v-else>идет загрузка</div>
     </div>
-  </div>
   </div>
 </template>
 
 <style scoped>
-.main-container {
-  margin: 0 auto;
-  max-width: 1400px;
-  display: flex;
+.main {
   justify-content: center;
   align-items: center;
+}
+.main-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
 }
 
 .container {
@@ -54,9 +56,9 @@ const store = useWeatherStore()
   display: flex;
   flex-direction: column;
 }
-.current-data{
+.current-data {
   margin-top: 25px;
-  margin-left: 80px;
+  margin-left: 50px;
 }
 .today {
   display: flex;

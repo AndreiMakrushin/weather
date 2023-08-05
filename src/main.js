@@ -10,3 +10,4 @@ app.use(createPinia())
 app.use(VueGeolocation)
 app.use(router)
 app.mount('#app')
+
