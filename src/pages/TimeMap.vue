@@ -11,7 +11,6 @@ const store = useWeatherStore()
 onMounted(() => {
   new Swiper(swiperContainer.value, {
     slidesPerView: 'auto',
-    // Другие настройки свайпера...
   });
 });
 
