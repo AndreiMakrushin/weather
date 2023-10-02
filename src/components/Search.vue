@@ -10,15 +10,14 @@ const store = useWeatherStore()
           <h3>X</h3>
         </div>
         <div class="block-search">
-          <input type="text" placeholder="Введите город" v-model="store.citySelect"/>
+          <input type="text" placeholder="Введите город" v-model="store.citySelect" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
-
-.container-weather.active{
+.container-weather.active {
   width: 400px;
   transition: width 0.5s ease;
 }
@@ -38,17 +37,17 @@ const store = useWeatherStore()
   margin: 30px 0px 30px 0px;
   padding: 7px;
 }
-.close{
+.close {
   font-size: 20px;
   margin-left: 90%;
   cursor: pointer;
   color: #e6e6e6;
   padding: 15px;
 }
-h3{
+h3 {
   font-size: 30px;
 }
-.block-search input{
+.block-search input {
   width: 100%;
   margin-top: 20px;
   padding: 9px;
@@ -58,9 +57,17 @@ h3{
 }
 
 @media (max-width: 1000px) {
-  .container-weather.active{
+  .container-weather.active {
     height: 700px;
     width: 910px;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  .container-weather.active {
+    height: 700px;
+    max-width: 100%;
     border-bottom-right-radius: 20px;
   }
 }

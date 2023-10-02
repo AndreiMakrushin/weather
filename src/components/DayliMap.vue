@@ -120,5 +120,27 @@ const getWeatherForTodays = (daymap) => {
   color: #acacac;
 }
 
+@media(max-width: 1000px) {
+  .block-day-temperature {
+    max-width: 850px;
+  }
+}
+
+@media(max-width: 820px) {
+  .block-day-temperature {
+    max-width: 770px;
+  }
+}
+
+@media(max-width: 500px) {
+  .block-day-temperature {
+    max-width: 456px;
+  }
+}
+@media(max-width: 415px) {
+  .block-day-temperature {
+    max-width: 370px;
+  }
+}
 
 </style>
