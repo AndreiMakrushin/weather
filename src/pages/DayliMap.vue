@@ -8,21 +8,19 @@ const swiperContainer = ref(null)
 
 onMounted(() => {
   new Swiper(swiperContainer.value, {
-    slidesPerView: 'auto',
+    slidesPerView: 'auto'
   })
 })
 
-
 const store = useWeatherStore()
 const getWeatherForTodays = (daymap) => {
-  const currentDate = new Date().toISOString().split('T')[0];
+  const currentDate = new Date().toISOString().split('T')[0]
 
   return daymap.reduce((acc, time) => {
-    const forecastDate = time.dt_txt.split(' ')[0];
+    const forecastDate = time.dt_txt.split(' ')[0]
 
     if (forecastDate !== currentDate) {
-      const existingDay = acc.find((item) => item.date === forecastDate);
-
+      const existingDay = acc.find((item) => item.date === forecastDate)
 
       if (!existingDay) {
         acc.push({
@@ -34,27 +32,36 @@ const getWeatherForTodays = (daymap) => {
           desc: time.weather[0].description,
           image: time.weather[0].icon,
           minTemperaturee: time.main.temp_min
-        });
+        })
       } else if (time.main.temp > existingDay.temperature) {
-        existingDay.temperature = time.main.temp;
+        existingDay.temperature = time.main.temp
       }
     }
 
-    return acc;
-  }, []);
-};
+    return acc
+  }, [])
+}
 </script>
 
 <template>
   <div>
-    <div class="block-day-temperature" ref="swiperContainer">
+    <div class="block">
+      <div class="block-day-temperature" ref="swiperContainer">
       <div class="swiper-wrapper">
-        <div v-for="item in getWeatherForTodays(store.cityWeather.list)" :key="item.dt" class="swiper-slide">
+        <div
+          v-for="item in getWeatherForTodays(store.cityWeather.list)"
+          :key="item.dt"
+          class="swiper-slide"
+        >
           <div class="weather-item">
             <div class="weather-info">
-              <p class="weather-date">{{ [store.getWeekday(item.date)[0]]
-                .concat(store.getWeekday(item.date).slice(1))
-                .join(' ')}}</p>
+              <p class="weather-date">
+                {{
+                  [store.getWeekday(item.date)[0]]
+                    .concat(store.getWeekday(item.date).slice(1))
+                    .join(' ')
+                }}
+              </p>
               <div class="weather-details">
                 <img :src="store.getWeatherImage(item.image)" class="weather-icon" />
                 <div class="temp">
@@ -67,13 +74,16 @@ const getWeatherForTodays = (daymap) => {
         </div>
       </div>
     </div>
+    </div>
   </div>
 </template>
 <style scoped>
-
-
 .swiper-slide {
   width: auto;
+}
+.block{
+  width: 100vw;
+  display: flex;
 }
 .block-day-temperature {
   width: 100%;
@@ -113,6 +123,4 @@ const getWeatherForTodays = (daymap) => {
 .temp .weather-temp-night {
   color: #acacac;
 }
-
-
 </style>

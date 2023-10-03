@@ -56,18 +56,10 @@ h3 {
   font-weight: 100;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1350px) {
   .container-weather.active {
     height: 700px;
-    width: 910px;
-    border-bottom-right-radius: 20px;
-  }
-}
-
-@media (max-width: 800px) {
-  .container-weather.active {
-    height: 700px;
-    max-width: 100%;
+    width: 100%;
     border-bottom-right-radius: 20px;
   }
 }

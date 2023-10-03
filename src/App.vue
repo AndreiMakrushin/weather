@@ -58,10 +58,10 @@ const store = useWeatherStore()
 }
 .current-data{
   margin: 20px;
-  width: 100%;
+  max-width: 890px;
 }
 
-@media (max-width: 1315px) {
+@media (max-width: 1350px) {
   .today{
     flex-direction: column;
   }
