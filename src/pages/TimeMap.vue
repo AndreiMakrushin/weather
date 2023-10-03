@@ -56,7 +56,7 @@ const getWeatherForToday = (timemap) => {
 <style scoped>
 .block-day-temperature {
   overflow: hidden;
-  max-width: 881px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -90,4 +90,5 @@ const getWeatherForToday = (timemap) => {
 .swiper-slide {
   width: auto;
 }
+
 </style>

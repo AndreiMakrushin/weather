@@ -12,46 +12,37 @@ onMounted(() => {
   })
 })
 
+
 const store = useWeatherStore()
 const getWeatherForTodays = (daymap) => {
-  const maxTemperatures = daymap.reduce((acc, time) => {
-    const forecastDate = time.dt_txt.split(' ')[0]
-    const temperature = time.main.temp
-    const minTemperaturee = time.main.temp_min
-    const pressure = time.main.pressure
-    const speed = time.wind.speed
-    const humidity = time.main.humidity
-    const desc = time.weather[0].description
-    const image = time.weather[0].icon
+  const currentDate = new Date().toISOString().split('T')[0];
 
-    const currentDate = new Date().toISOString().split('T')[0]
+  return daymap.reduce((acc, time) => {
+    const forecastDate = time.dt_txt.split(' ')[0];
 
-    if (forecastDate === currentDate) {
-      return acc
+    if (forecastDate !== currentDate) {
+      const existingDay = acc.find((item) => item.date === forecastDate);
+
+
+      if (!existingDay) {
+        acc.push({
+          date: forecastDate,
+          temperature: time.main.temp,
+          pressure: time.main.pressure,
+          speed: time.wind.speed,
+          humidity: time.main.humidity,
+          desc: time.weather[0].description,
+          image: time.weather[0].icon,
+          minTemperaturee: time.main.temp_min
+        });
+      } else if (time.main.temp > existingDay.temperature) {
+        existingDay.temperature = time.main.temp;
+      }
     }
 
-    const existingDay = acc.find((item) => item.date === forecastDate)
-
-    if (!existingDay) {
-      acc.push({
-        date: forecastDate,
-        temperature,
-        pressure,
-        speed,
-        humidity,
-        desc,
-        image,
-        minTemperaturee
-      })
-    } else if (temperature > existingDay.temperature) {
-      existingDay.temperature = temperature
-    }
-
-    return acc
-  }, [])
-
-  return maxTemperatures
-}
+    return acc;
+  }, []);
+};
 </script>
 
 <template>
@@ -65,7 +56,7 @@ const getWeatherForTodays = (daymap) => {
                 .concat(store.getWeekday(item.date).slice(1))
                 .join(' ')}}</p>
               <div class="weather-details">
-                <img :src="store.getWeatherImage(item.image)" alt="" class="weather-icon" />
+                <img :src="store.getWeatherImage(item.image)" class="weather-icon" />
                 <div class="temp">
                   <p class="weather-temp-day">{{ Math.round(item.temperature) }}°C</p>
                   <p class="weather-temp-night">{{ Math.round(item.minTemperaturee) }}°C</p>
@@ -85,11 +76,14 @@ const getWeatherForTodays = (daymap) => {
   width: auto;
 }
 .block-day-temperature {
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
 }
 .weather-item {
+  width: 134px;
   margin: 20px;
   color: white;
   background-color: #212331;
@@ -120,27 +114,5 @@ const getWeatherForTodays = (daymap) => {
   color: #acacac;
 }
 
-@media(max-width: 1000px) {
-  .block-day-temperature {
-    max-width: 850px;
-  }
-}
-
-@media(max-width: 820px) {
-  .block-day-temperature {
-    max-width: 770px;
-  }
-}
-
-@media(max-width: 500px) {
-  .block-day-temperature {
-    max-width: 456px;
-  }
-}
-@media(max-width: 415px) {
-  .block-day-temperature {
-    max-width: 370px;
-  }
-}
 
 </style>

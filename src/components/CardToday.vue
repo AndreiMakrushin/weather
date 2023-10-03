@@ -110,7 +110,7 @@ button {
   margin-right: 10px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1315px) {
   .container-weather{
     width: 100%;
     border-bottom-right-radius: 20px;
